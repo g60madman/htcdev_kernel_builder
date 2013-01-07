@@ -1,0 +1,23 @@
+HTCDEV Kernel Building Script 
+===========
+This script is designed to create a .zip to flash of a new kernel. This script was designed to make life easier for all developers to quickly test kernels before building the ROM. All tools and prebuilt software are located in this 'htcdev_kernel_builder' directory taken from CM10 sources. The things you will need is Kernel Source, and a known working boot.img
+
+Building the Kernel
+---------------
+Edit buildkernel.sh varibles based on your directory structure
+
+Copy a known good working boot.img into the root of 'htcdev_kernel_builder'
+
+Download kernel source into 'htcdev_kernel_builder' folder
+    git clone https://github.com/some_repo/some_kernel.git kernel
+
+Now run the following command from inside buildkernel dir
+    sh ./buildkernel.sh
+
+How the script works
+---------------
+The script extracts the ramdisk from the boot.img into htcdev_kernel_builder/ramdisk/boot.img-ramdisk which will have your *.rc files. Once those are extracted the kernel will build. Once it's complete it will copy over the zImage then wrap the boot.img-ramdisk around the zImage and then create a *.zip which can then be flashed. You will find the zImage, boot.img, and a flahsable *.zip located in release tools directory after completion.
+
+Advance info
+---------------
+When running the buildkernel.sh it will extract your boot.img into htcdev_kernel_builder/ramdisk/boot.img-ramdisk folder. In this folder it will have permissions for the kernel based on what to do when it boots based on the *.rc files. While the kernel is building if you have other permission you want to test you can replace them during the build. When doing this I usally copy the boot.img-ramdisk folder make changes and during the build replace with my new permissioins if needed.

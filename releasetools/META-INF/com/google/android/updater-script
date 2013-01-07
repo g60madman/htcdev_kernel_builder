@@ -1,0 +1,5 @@
+ui_print("HTC kernel");
+ui_print("Extracting boot image to boot partition...");
+package_extract_file("boot.img", "/dev/block/mmcblk0p21");
+ui_print("HTC Kernel Installed!");
+
